@@ -1,0 +1,8 @@
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
+export const ADD_TODO_ID_IN_CATEGORY = "SET_TODO_ID_IN_CATEGORY";
+export const ADD_TODO = "ADD_TODO";
+export const CURRENT_TODO_ID = "CURRENT_TODO_ID";
+export const CURRENT_TODO = "CURRENT_TODO";
+export const EDIT_TODO = "EDIT_TODO";
+export const DELETE_TODO = "DELETE_TODO";
