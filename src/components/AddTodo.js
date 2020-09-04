@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import {addTodo, createTodo} from "../actions";
 
 export class AddTodo extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export class AddTodo extends Component {
 
   sendTextToList = () => {
     this.generateId();
-    this.props.addTodo(this.state);
+    this.props.addTodo(this.state.text);
     this.setState({
       text: "",
     });
@@ -66,7 +66,7 @@ export class AddTodo extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addTodo: (state) => dispatch(addTodo(state)),
+  addTodo: (text) => dispatch(createTodo(text)),
 });
 
 
