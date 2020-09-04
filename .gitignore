@@ -1,4 +1,6 @@
 /node_modules
+/public
+/dist
 /demo_webpack.iml
 /.idea/misc.xml
 /.idea/modules.xml

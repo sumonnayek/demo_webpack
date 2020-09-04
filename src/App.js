@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import TodoMain from "./js/components/TodoMain";
+import TodoMain from "./components/TodoMain";
 import { Provider } from "react-redux";
 import store from './store';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
