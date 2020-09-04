@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CategoryList from "./CategoryList";
 
 export class Category extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ export class Category extends Component {
           Categories
           <select name="Categories" id="">
             {categories.map((category) => (
-            <option value={category}>{category}</option>
+            <option value={category} key={category}>{category}</option>
             ))}
           </select>
         </label>

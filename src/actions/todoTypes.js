@@ -1,6 +1,10 @@
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const ADD_TODO_ID_IN_CATEGORY = "SET_TODO_ID_IN_CATEGORY";
+export const ADD_TODO_REQUEST = "ADD_TODO_REQUEST";
+export const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
+export const ADD_TODO_ERROR = "ADD_TODO_ERROR";
+export const ADD_TODO_ = "ADD_TODO";
 export const ADD_TODO = "ADD_TODO";
 export const CURRENT_TODO_ID = "CURRENT_TODO_ID";
 export const CURRENT_TODO = "CURRENT_TODO";

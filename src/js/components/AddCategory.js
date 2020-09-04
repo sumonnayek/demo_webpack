@@ -4,7 +4,7 @@ import { addCategory } from '../../actions'
 
 export class AddCategory extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     
         this.state = {
              text:''
@@ -15,18 +15,18 @@ export class AddCategory extends Component {
         this.setState({
             text: e.target.value
         })
-    }
+    };
 
     addCategoryToList = () => {
-        const { text } = this.state
+        const { text } = this.state;
         this.props.addCategory(text);
-        // this.setState({ text: '' })
-    }
+        this.setState({ text: '' });
+    };
     
     render() {
         return (
             <div>
-                <input type='text' onChange={this.inputChange} />
+                <input type='text' onChange={this.inputChange} value={this.state.text} />
                 <button onClick={this.addCategoryToList}>Add Category</button>
             </div>
         )

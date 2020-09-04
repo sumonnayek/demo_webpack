@@ -28,4 +28,14 @@ export const addTodo = todo => ({
 export const addTodoRequest = todo => ({
     type: ADD_TODO,
     payload: { todo }
-})
+});
+
+export const addTodoSuccess = todo => ({
+    type: ADD_TODO,
+    payload: { todo }
+});
+
+export const addTodoError = todo => ({
+    type: ADD_TODO,
+    payload: { todo }
+});
