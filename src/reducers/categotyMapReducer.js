@@ -1,13 +1,11 @@
-import { ADD_CATEGORY, DELETE_CATEGORY } from "../actions/todoTypes";
-import store from "../store";
+import { ADD_CATEGORY } from '../actions/todoTypes';
 
 const initialState = {};
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
+    switch (action.type) {
     case ADD_CATEGORY: {
-        console.log(action.payload);
-      return { ...state, [action.payload.text]: [] };
+        return { ...state, [action.payload.text]: [] };
     }
     // case DELETE_CATEGORY: {
     //     const state = store.getState();
@@ -15,8 +13,8 @@ const reducer = (state = initialState, action) => {
     // }
 
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default reducer;
