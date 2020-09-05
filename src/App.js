@@ -15,10 +15,3 @@ function App() {
 }
 
 export default App;
-
-//  {
-//   categories: {},
-//   todoList: [],
-//   loading: false,
-//   activeTodoId: null,
-// }
