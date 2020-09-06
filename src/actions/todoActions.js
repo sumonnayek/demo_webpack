@@ -1,81 +1,92 @@
 import {
-  ADD_CATEGORY,
-  DELETE_CATEGORY,
-  ADD_TODO_ID_IN_CATEGORY,
-  ADD_TODO,
-  CURRENT_TODO,
-  CURRENT_TODO_ID,
-  EDIT_TODO,
-  DELETE_TODO,
-  CREATE_TODO_REQUEST,
-  CREATE_TODO_SUCCESS,
-  CREATE_TODO_FAILURE,
-} from "./todoTypes";
-import store from "../store";
+	ADD_CATEGORY,
+	SELECT_CATEGORY,
+	CURRENT_TODO,
+	CURRENT_TODO_ID,
+	EDIT_TODO,
+	DELETE_TODO,
+	CREATE_TODO_REQUEST,
+	CREATE_TODO_SUCCESS,
+	CREATE_TODO_FAILURE,
+	DELETE_TODO_REQUEST,
+	DELETE_TODO_SUCCESS,
+	DELETE_TODO_FAILURE,
+} from './todoTypes';
 
 export const addCategory = (text) => ({
-  type: ADD_CATEGORY,
-  payload: { text },
+	type: ADD_CATEGORY,
+	payload: { text },
 });
 
-export const deleteCategory = (text) => ({
-  type: DELETE_CATEGORY,
-  payload: { text },
+export const currentCategory = (category) => ({
+	type: SELECT_CATEGORY,
+	payload: { category },
 });
 
-export const addTodo = (todo) => ({
-  type: ADD_TODO,
-  payload: { todo },
-});
+export function createTodo(text, category) {
+	const createTodoRequest = () => ({
+		type: CREATE_TODO_REQUEST,
+	});
 
-export const addTodoRequest = (todo) => ({
-  type: ADD_TODO,
-  payload: { todo },
-});
+	const createTodoSuccess = ({ id, text, completed, category }) => {
+		return {
+			type: CREATE_TODO_SUCCESS,
+			payload: {
+				id,
+				text,
+				completed,
+				category,
+			},
+		};
+	};
 
-export const addTodoSuccess = (todo) => ({
-  type: ADD_TODO,
-  payload: { todo },
-});
+	const createTodoFailure = () => ({
+		type: CREATE_TODO_FAILURE,
+	});
 
-export const addTodoError = (todo) => ({
-  type: ADD_TODO,
-  payload: { todo },
-});
+	return async (dispatch) => {
+		dispatch(createTodoRequest());
+		const id = Math.random().toString().substr(2, 9);
+		let promise = new Promise((resolve, reject) => {
+			resolve({ id, text, completed: false, category });
+		});
+		promise.then(
+			(response) => {
+				dispatch(createTodoSuccess(response));
+			},
+			() => {
+				dispatch(createTodoFailure());
+			}
+		);
+	};
+}
 
-export function createTodo(text) {
-  const createTodoRequest = () => ({
-    type: CREATE_TODO_REQUEST,
-  });
+export function deleteTodo(id, category) {
+	const deleteTodoRequest = () => ({
+		type: DELETE_TODO_REQUEST,
+	});
 
-  const createTodoSuccess = ({ _id, text, completed }) => {
-    return {
-      type: CREATE_TODO_SUCCESS,
-      payload: {
-        id: _id,
-        text,
-        completed,
-      },
-    };
-  };
+	const deleteTodoSuccess = ({ id, category }) => ({
+		type: DELETE_TODO_SUCCESS,
+		payload: { id, category },
+	});
 
-  const createTodoFailure = () => ({
-    type: CREATE_TODO_FAILURE,
-  });
+	const deleteTodoFailure = () => ({
+		type: DELETE_TODO_FAILURE,
+	});
 
-  return async (dispatch) => {
-    dispatch(createTodoRequest());
-    const id = Math.random().toString().substr(2, 9);
-    let promise = new Promise((resolve, reject) => {
-      resolve({ id, text, completed: false });
-    });
-    promise.then(
-      (response) => {
-        dispatch(createTodoSuccess(response));
-      },
-      (err) => {
-        dispatch(createTodoFailure());
-      }
-    );
-  };
+	return async (dispatch) => {
+		dispatch(deleteTodoRequest());
+		let promise = new Promise((resolve, reject) => {
+			resolve({ id, category });
+		});
+		promise.then(
+			(response) => {
+				dispatch(deleteTodoSuccess(response));
+			},
+			() => {
+				dispatch(deleteTodoFailure());
+			}
+		);
+	};
 }

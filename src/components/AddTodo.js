@@ -1,74 +1,71 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {addTodo, createTodo} from "../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createTodo } from '../actions';
 
 export class AddTodo extends Component {
-  constructor(props) {
-    super(props);
-    this.inputRef = React.createRef();
-    this.state = {
-      text: "",
-      completed: false,
-    };
-    // const {resetActiveId} = this.props;
-  }
+	constructor(props) {
+		super(props);
+		this.inputRef = React.createRef();
+		this.state = {
+			text: '',
+		};
+		// const {resetActiveId} = this.props;
+	}
 
-  generateId = () => {
-    let genaratedId = Math.random().toString().substr(2, 9);
-    this.setState({
-      id: genaratedId,
-    });
-  };
+	generateId = () => {
+		let genaratedId = Math.random().toString().substr(2, 9);
+		this.setState({
+			id: genaratedId,
+		});
+	};
 
-  sendTextToList = () => {
-    this.generateId();
-    this.props.addTodo(this.state.text);
-    this.setState({
-      text: "",
-    });
-  };
+	sendTextToList = () => {
+		const { selectedCategory } = this.props;
+		this.generateId();
+		this.props.addTodo(this.state.text, selectedCategory);
+		this.setState({
+			text: '',
+		});
+	};
 
-  componentDidMount() {
-    this.inputRef.current.focus();
-    this.generateId();
-    // let genaratedId = Math.random().toString().substr(2, 9);
-    // this.setState({
-    //   id: genaratedId
-    // })
-  }
+	componentDidMount() {
+		this.inputRef.current.focus();
+	}
 
-  inputChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
-  };
+	inputChange = (e) => {
+		this.setState({
+			text: e.target.value,
+		});
+	};
 
-  resetActiveId = () => {
-    const { resetActiveId } = this.props;
-    // resetActiveId()
-  };
+	resetActiveId = () => {
+		const { resetActiveId } = this.props;
+		// resetActiveId()
+	};
 
-  render() {
-    const { text } = this.state;
-    return (
-      <div>
-        <input
-          value={text}
-          onChange={this.inputChange}
-          ref={this.inputRef}
-          type="text"
-          onFocus={this.resetActiveId()}
-        />
-        <button onClick={this.sendTextToList}> Add </button>
-      </div>
-    );
-  }
+	render() {
+		const { text } = this.state;
+		return (
+			<div>
+				<input
+					value={text}
+					onChange={this.inputChange}
+					ref={this.inputRef}
+					type='text'
+					onFocus={this.resetActiveId()}
+				/>
+				<button onClick={this.sendTextToList}> Add </button>
+			</div>
+		);
+	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addTodo: (text) => dispatch(createTodo(text)),
+	addTodo: (text, selectedCategory) => dispatch(createTodo(text, selectedCategory)),
 });
 
+const mapStateToProps = (state) => ({
+	selectedCategory: state.selectedCategory,
+});
 
-
-export default connect(null, mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

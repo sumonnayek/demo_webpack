@@ -1,60 +1,60 @@
-import React, { Component } from "react";
-import AddTodo from "./AddTodo";
-import GenericList from "./GenericList";
-import Todo from "./Todo";
-import Category from "./Category";
-import AddCategory from "./AddCategory";
-import { connect } from "react-redux";
-import Tabs from "./Tabs";
+import React, { Component } from 'react';
+import AddTodo from './AddTodo';
+import GenericList from './GenericList';
+import Todo from './Todo';
+import Category from './Category';
+import AddCategory from './AddCategory';
+import { connect } from 'react-redux';
+import Tabs from './Tabs';
 
 export class TodoMain extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {
-      // categoryIdAndTodoIdMap: {},
-      // tododMap: {},
-      todos: [],
-      categories: [],
-      loading: false,
-      edit: "",
-      activeTodoId: 0,
-    };
-  }
+		this.state = {
+			// categoryIdAndTodoIdMap: {},
+			// tododMap: {},
+			todos: [],
+			categories: [],
+			loading: false,
+			edit: '',
+			activeTodoId: 0,
+		};
+	}
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.categoryList !== prevProps.categoryList) {
-      console.log(this.props.categoryList);
-    }
-  }
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.categoryList !== prevProps.categoryList) {
+			console.log(this.props.categoryList);
+		}
+	}
 
-  render() {
-    let categories = [];
-    let todos = [];
-    const { categoryList, todoList } = this.props;
-    console.log(this.props);
-    categories = Object.keys(categoryList);
-    todos = Object.values(todoList);
-    return (
-      <div>
-        <AddCategory />
-        <Category categories={categories} />
-        <GenericList
-          renderComponent={Todo}
-          list={todos}
-          onEditTodoItem={this.onEditTodoHandler}
-          updateTodoList={this.updateTodoList}
-          updateTodoCompleted={this.updateTodoCompleted}
-        />
-        <AddTodo />
-      </div>
-    );
-  }
+	render() {
+		let categories = [];
+		let todos = [];
+		const { categoryList, todoList } = this.props;
+		console.log(this.props);
+		categories = Object.keys(categoryList);
+		todos = Object.values(todoList);
+		return (
+			<div>
+				<AddCategory />
+				<Category categories={categories} />
+				<GenericList
+					renderComponent={Todo}
+					list={todos}
+					onEditTodoItem={this.onEditTodoHandler}
+					updateTodoList={this.updateTodoList}
+					updateTodoCompleted={this.updateTodoCompleted}
+				/>
+				<AddTodo />
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = (state) => ({
-  categoryList: state.categoryMap,
-  todoList: state.todo
+	categoryList: state.categoryMap,
+	todoList: state.todo,
 });
 
 export default connect(mapStateToProps, null)(TodoMain);
