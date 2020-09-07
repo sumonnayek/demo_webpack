@@ -12,12 +12,17 @@ export class Category extends Component {
 	};
 
 	render() {
-		const { categories = [] } = this.props;
+		const { categories = [], currentCategory = '' } = this.props;
 		return (
 			<div>
 				<label>
 					Categories
-					<select name='Categories' id='' onChange={this.setCurrentCategory}>
+					<select
+						name='Categories'
+						id=''
+						onChange={this.setCurrentCategory}
+						value={currentCategory}
+					>
 						{categories?.map((category) => (
 							<option value={category} key={category}>
 								{category}
@@ -34,4 +39,8 @@ const mapDispatchToProps = (dispatch) => ({
 	setCurrentCategory: (category) => dispatch(currentCategory(category)),
 });
 
-export default connect(null, mapDispatchToProps)(Category);
+const mapStateToProps = (state) => ({
+	currentCategory: state.selectedCategory,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

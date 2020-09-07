@@ -1,31 +1,43 @@
-import React, { Component } from "react";
-import ViewTodo from "./ViewTodo";
-import EditTodo from "./EditTodo";
+import React, { Component } from 'react';
+import ViewTodo from './ViewTodo';
+import EditTodo from './EditTodo';
+import { connect } from 'react-redux';
+import { setActiveTodoId } from '../actions';
 
 export class Todo extends Component {
-
-  render() {
-    console.log(this.props)
-    let presentView;
-    const {onEditTodoItem, activeTodoId, id, text, updateTodoList, deleteTodoText,updateTodoCompleted, completed} = this.props;
-    if (activeTodoId === id) {
-      presentView = (
-          <EditTodo text={text}
-                    id={id}
-                    updateTodoList={updateTodoList}/>
-      );
-    } else {
-      presentView = (
-          <ViewTodo text={text}
-                    id={id}
-                    deleteTodoText={deleteTodoText}
-                    onEditTodoItem={onEditTodoItem}
-                    updateTodoCompleted={updateTodoCompleted}
-                    completed={completed}/>
-      );
-    }
-    return <>{presentView}</>;
-  }
+	render() {
+		console.log(this.props);
+		let presentView;
+		const {
+			onEditTodoItem,
+			activeTodoId,
+			id,
+			text,
+			updateTodoList,
+			deleteTodoText,
+			updateTodoCompleted,
+			completed,
+		} = this.props;
+		if (activeTodoId === id) {
+			presentView = <EditTodo text={text} id={id} updateTodoList={updateTodoList} />;
+		} else {
+			presentView = (
+				<ViewTodo
+					text={text}
+					id={id}
+					deleteTodoText={deleteTodoText}
+					onEditTodoItem={onEditTodoItem}
+					updateTodoCompleted={updateTodoCompleted}
+					completed={completed}
+				/>
+			);
+		}
+		return <>{presentView}</>;
+	}
 }
 
-export default Todo;
+const setStateToProps = (state) => ({
+	activeTodoId: state.activeTodoId,
+});
+
+export default connect(setStateToProps, null)(Todo);

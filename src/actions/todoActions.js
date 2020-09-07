@@ -12,6 +12,10 @@ import {
 	DELETE_TODO_SUCCESS,
 	DELETE_TODO_FAILURE,
 	UPDATE_TODO_COMPLETED,
+	SET_ACTIVE_TODO_ID,
+	EDIT_TODO_TEXT_REQUEST,
+	EDIT_TODO_TEXT_SUCCESS,
+	EDIT_TODO_TEXT_FAILURE,
 } from './todoTypes';
 
 export const addCategory = (text) => ({
@@ -96,3 +100,38 @@ export const updateTodoCompleted = (id) => ({
 	type: UPDATE_TODO_COMPLETED,
 	payload: { id },
 });
+
+export const setActiveTodoId = (id) => ({
+	type: SET_ACTIVE_TODO_ID,
+	payload: { id },
+});
+
+export function editTodoText(id, text) {
+	const editTodoTextRequest = () => ({
+		type: EDIT_TODO_TEXT_REQUEST,
+	});
+
+	const editTodoTextSuccess = ({ id, text }) => ({
+		type: EDIT_TODO_TEXT_SUCCESS,
+		paylaod: { id, text },
+	});
+
+	const editTodoTextFailure = () => ({
+		type: EDIT_TODO_TEXT_FAILURE,
+	});
+
+	return async (dispatch) => {
+		dispatch(editTodoTextRequest());
+		let promise = new Promise((resolve, reject) => {
+			resolve({ id, text });
+		});
+		promise.then(
+			(response) => {
+				dispatch(editTodoTextSuccess(response));
+			},
+			() => {
+				dispatch(editTodoTextFailure());
+			}
+		);
+	};
+}
