@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editTodoText } from '../actions';
+import { editTodoText, resetActiveTodoId } from '../actions';
 
 export class EditTodo extends Component {
 	constructor(props) {
@@ -17,10 +17,11 @@ export class EditTodo extends Component {
 		});
 	};
 
-	editTodoText = () => {
+	editTodoText = async () => {
 		const { text } = this.state;
-		const { id, editTodoText } = this.props;
-		editTodoText(id, text);
+		const { id, editTodoText, resetActiveTodoId } = this.props;
+		await editTodoText(id, text);
+		resetActiveTodoId();
 	};
 
 	render() {
@@ -29,6 +30,7 @@ export class EditTodo extends Component {
 			<div>
 				<input value={this.state.text} onChange={this.inputChange} type='text' />
 				<button onClick={this.editTodoText}> Save </button>
+				<button onClick={() => this.props.resetActiveTodoId()}>X</button>
 			</div>
 		);
 	}
@@ -36,6 +38,7 @@ export class EditTodo extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
 	editTodoText: (id, text) => dispatch(editTodoText(id, text)),
+	resetActiveTodoId: () => dispatch(resetActiveTodoId()),
 });
 
 export default connect(null, mapDispatchToProps)(EditTodo);

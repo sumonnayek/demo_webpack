@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ViewTodo from './ViewTodo';
 import EditTodo from './EditTodo';
 import { connect } from 'react-redux';
-import { setActiveTodoId } from '../actions';
 
 export class Todo extends Component {
 	render() {
@@ -25,8 +24,6 @@ export class Todo extends Component {
 				<ViewTodo
 					text={text}
 					id={id}
-					deleteTodoText={deleteTodoText}
-					onEditTodoItem={onEditTodoItem}
 					updateTodoCompleted={updateTodoCompleted}
 					completed={completed}
 				/>

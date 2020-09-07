@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createTodo } from '../actions';
+import { createTodo, resetActiveTodoId } from '../actions';
 
 export class AddTodo extends Component {
 	constructor(props) {
@@ -52,7 +52,7 @@ export class AddTodo extends Component {
 					onChange={this.inputChange}
 					ref={this.inputRef}
 					type='text'
-					onFocus={this.resetActiveId()}
+					onFocus={() => this.props.resetActiveTodoId()}
 				/>
 				<button onClick={this.sendTextToList}> Add </button>
 			</div>
@@ -60,12 +60,13 @@ export class AddTodo extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	addTodo: (text, selectedCategory) => dispatch(createTodo(text, selectedCategory)),
-});
-
 const mapStateToProps = (state) => ({
 	selectedCategory: state.selectedCategory,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	addTodo: (text, selectedCategory) => dispatch(createTodo(text, selectedCategory)),
+	resetActiveTodoId: () => dispatch(resetActiveTodoId()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

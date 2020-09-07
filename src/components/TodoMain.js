@@ -10,16 +10,6 @@ import Tabs from './Tabs';
 export class TodoMain extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			// categoryIdAndTodoIdMap: {},
-			// tododMap: {},
-			todos: [],
-			categories: [],
-			loading: false,
-			edit: '',
-			activeTodoId: 0,
-		};
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -31,21 +21,21 @@ export class TodoMain extends Component {
 	render() {
 		let categories = [];
 		let todos = [];
-		const { categoryList, todoList } = this.props;
+		let todoIdList = [];
+		const { categoryList = {}, todoList = {}, selectedCategory = '' } = this.props;
 		console.log(this.props);
+		todoIdList = categoryList[selectedCategory];
 		categories = Object.keys(categoryList);
-		todos = Object.values(todoList);
+		for (let i = 0; i < todoIdList?.length; i++) {
+			if (todoIdList[i] in todoList) {
+				todos.push(todoList[todoIdList[i]]);
+			}
+		}
 		return (
 			<div>
 				<AddCategory />
 				<Category categories={categories} />
-				<GenericList
-					renderComponent={Todo}
-					list={todos}
-					onEditTodoItem={this.onEditTodoHandler}
-					updateTodoList={this.updateTodoList}
-					updateTodoCompleted={this.updateTodoCompleted}
-				/>
+				<GenericList renderComponent={Todo} list={todos} />
 				<AddTodo />
 			</div>
 		);
@@ -55,6 +45,7 @@ export class TodoMain extends Component {
 const mapStateToProps = (state) => ({
 	categoryList: state.categoryMap,
 	todoList: state.todo,
+	selectedCategory: state.selectedCategory,
 });
 
 export default connect(mapStateToProps, null)(TodoMain);

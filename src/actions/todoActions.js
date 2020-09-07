@@ -1,10 +1,6 @@
 import {
 	ADD_CATEGORY,
 	SELECT_CATEGORY,
-	CURRENT_TODO,
-	CURRENT_TODO_ID,
-	EDIT_TODO,
-	DELETE_TODO,
 	CREATE_TODO_REQUEST,
 	CREATE_TODO_SUCCESS,
 	CREATE_TODO_FAILURE,
@@ -16,6 +12,7 @@ import {
 	EDIT_TODO_TEXT_REQUEST,
 	EDIT_TODO_TEXT_SUCCESS,
 	EDIT_TODO_TEXT_FAILURE,
+	RESET_ACTIVE_TODO_ID,
 } from './todoTypes';
 
 export const addCategory = (text) => ({
@@ -49,7 +46,7 @@ export function createTodo(text, category) {
 		type: CREATE_TODO_FAILURE,
 	});
 
-	return async (dispatch) => {
+	return (dispatch) => {
 		dispatch(createTodoRequest());
 		const id = Math.random().toString().substr(2, 9);
 		let promise = new Promise((resolve, reject) => {
@@ -80,7 +77,7 @@ export function deleteTodo(id, category) {
 		type: DELETE_TODO_FAILURE,
 	});
 
-	return async (dispatch) => {
+	return (dispatch) => {
 		dispatch(deleteTodoRequest());
 		let promise = new Promise((resolve, reject) => {
 			resolve({ id, category });
@@ -113,14 +110,14 @@ export function editTodoText(id, text) {
 
 	const editTodoTextSuccess = ({ id, text }) => ({
 		type: EDIT_TODO_TEXT_SUCCESS,
-		paylaod: { id, text },
+		payload: { id, text },
 	});
 
 	const editTodoTextFailure = () => ({
 		type: EDIT_TODO_TEXT_FAILURE,
 	});
 
-	return async (dispatch) => {
+	return (dispatch) => {
 		dispatch(editTodoTextRequest());
 		let promise = new Promise((resolve, reject) => {
 			resolve({ id, text });
@@ -135,3 +132,7 @@ export function editTodoText(id, text) {
 		);
 	};
 }
+
+export const resetActiveTodoId = () => ({
+	type: RESET_ACTIVE_TODO_ID,
+});
