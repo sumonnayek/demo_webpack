@@ -38,11 +38,6 @@ export class AddTodo extends Component {
 		});
 	};
 
-	resetActiveId = () => {
-		const { resetActiveId } = this.props;
-		// resetActiveId()
-	};
-
 	render() {
 		const { text } = this.state;
 		return (

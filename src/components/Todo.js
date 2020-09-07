@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 export class Todo extends Component {
 	render() {
-		console.log(this.props);
 		let presentView;
 		const {
 			onEditTodoItem,

@@ -25,7 +25,6 @@ export class EditTodo extends Component {
 	};
 
 	render() {
-		// console.log(this.props)
 		return (
 			<div>
 				<input value={this.state.text} onChange={this.inputChange} type='text' />

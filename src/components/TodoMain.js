@@ -23,7 +23,6 @@ export class TodoMain extends Component {
 		let todos = [];
 		let todoIdList = [];
 		const { categoryList = {}, todoList = {}, selectedCategory = '' } = this.props;
-		console.log(this.props);
 		todoIdList = categoryList[selectedCategory];
 		categories = Object.keys(categoryList);
 		for (let i = 0; i < todoIdList?.length; i++) {
