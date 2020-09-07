@@ -11,6 +11,7 @@ import {
 	DELETE_TODO_REQUEST,
 	DELETE_TODO_SUCCESS,
 	DELETE_TODO_FAILURE,
+	UPDATE_TODO_COMPLETED,
 } from './todoTypes';
 
 export const addCategory = (text) => ({
@@ -90,3 +91,8 @@ export function deleteTodo(id, category) {
 		);
 	};
 }
+
+export const updateTodoCompleted = (id) => ({
+	type: UPDATE_TODO_COMPLETED,
+	payload: { id },
+});

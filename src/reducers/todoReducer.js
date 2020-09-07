@@ -1,4 +1,8 @@
-import { CREATE_TODO_SUCCESS, DELETE_TODO_SUCCESS } from '../actions/todoTypes';
+import {
+	CREATE_TODO_SUCCESS,
+	DELETE_TODO_SUCCESS,
+	UPDATE_TODO_COMPLETED,
+} from '../actions/todoTypes';
 
 const initialState = {};
 
@@ -17,6 +21,19 @@ const reducer = (state = initialState, action) => {
 			const todoList = { ...state };
 			delete todoList[id];
 			return { ...todoList };
+		}
+		case UPDATE_TODO_COMPLETED: {
+			const {
+				payload: { id },
+			} = action;
+			const todoList = { ...state };
+			const todo = { ...todoList[id] };
+			if (todo.completed == false) {
+				todo.completed = true;
+			} else {
+				todo.completed = false;
+			}
+			return { ...state, [id]: todo };
 		}
 		default:
 			return state;
