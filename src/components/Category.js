@@ -14,7 +14,7 @@ export class Category extends Component {
 	render() {
 		const { categories = [], currentCategory = '' } = this.props;
 		return (
-			<div>
+			<div className='marginTopBottom'>
 				<label>
 					Categories
 					<select

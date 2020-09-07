@@ -22,7 +22,12 @@ export class TodoMain extends Component {
 		let categories = [];
 		let todos = [];
 		let todoIdList = [];
-		const { categoryList = {}, todoList = {}, selectedCategory = '' } = this.props;
+		const {
+			categoryList = {},
+			todoList = {},
+			selectedCategory = '',
+			activeTodoId,
+		} = this.props;
 		todoIdList = categoryList[selectedCategory];
 		categories = Object.keys(categoryList);
 		for (let i = 0; i < todoIdList?.length; i++) {
@@ -32,10 +37,11 @@ export class TodoMain extends Component {
 		}
 		return (
 			<div>
+				<h3>TODO APP</h3>
 				<AddCategory />
-				<Category categories={categories} />
+				{!!selectedCategory && <Category categories={categories} />}
 				<GenericList renderComponent={Todo} list={todos} />
-				<AddTodo />
+				{!!selectedCategory && <AddTodo />}
 			</div>
 		);
 	}
@@ -45,6 +51,7 @@ const mapStateToProps = (state) => ({
 	categoryList: state.categoryMap,
 	todoList: state.todo,
 	selectedCategory: state.selectedCategory,
+	// activeTodoId: state.activeTodoId,
 });
 
 export default connect(mapStateToProps, null)(TodoMain);
