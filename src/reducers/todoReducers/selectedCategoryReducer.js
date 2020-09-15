@@ -1,4 +1,4 @@
-import { SELECT_CATEGORY } from '../actions/todoTypes';
+import { SELECT_CATEGORY } from '../../actions/todoTypes';
 
 const initialState = '';
 

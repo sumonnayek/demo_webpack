@@ -3,7 +3,7 @@ import {
 	DELETE_TODO_SUCCESS,
 	UPDATE_TODO_COMPLETED,
 	EDIT_TODO_TEXT_SUCCESS,
-} from '../actions/todoTypes';
+} from '../../actions/todoTypes';
 
 const initialState = {};
 

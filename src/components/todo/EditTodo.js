@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editTodoText, resetActiveTodoId } from '../actions';
+import { editTodoText, resetActiveTodoId } from '../../actions';
 
 export class EditTodo extends Component {
 	constructor(props) {

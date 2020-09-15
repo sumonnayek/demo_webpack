@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import AddTodo from './AddTodo';
-import GenericList from './GenericList';
+import GenericList from '../GenericList';
 import Todo from './Todo';
 import Category from './Category';
 import AddCategory from './AddCategory';
 import { connect } from 'react-redux';
-import Tabs from './Tabs';
 
 export class TodoMain extends Component {
 	constructor(props) {

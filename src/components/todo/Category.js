@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { currentCategory } from '../actions';
+import { currentCategory } from '../../actions';
 
 export class Category extends Component {
 	constructor(props) {

@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, CREATE_TODO_SUCCESS, DELETE_TODO_SUCCESS } from '../actions/todoTypes';
+import { ADD_CATEGORY, CREATE_TODO_SUCCESS, DELETE_TODO_SUCCESS } from '../../actions/todoTypes';
 
 const initialState = {};
 

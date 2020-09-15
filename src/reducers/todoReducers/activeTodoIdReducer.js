@@ -1,4 +1,4 @@
-import { SET_ACTIVE_TODO_ID, RESET_ACTIVE_TODO_ID } from '../actions/todoTypes';
+import { SET_ACTIVE_TODO_ID, RESET_ACTIVE_TODO_ID } from '../../actions/todoTypes';
 
 const initialState = 0;
 

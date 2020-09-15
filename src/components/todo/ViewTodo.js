@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { deleteTodo, updateTodoCompleted, setActiveTodoId } from '../actions';
+import { deleteTodo, updateTodoCompleted, setActiveTodoId } from '../../actions';
 
 export class ViewTodo extends Component {
 	constructor(props) {
