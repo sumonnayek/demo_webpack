@@ -20,7 +20,7 @@ export const fetchNotes = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				let obj = {};
-				data.map((note) => (obj[note._id] = note));
+				data.map(({_id: id, ...rest}) => (obj[id] = {...rest, id}));
 				return obj;
 			})
 			// .then(console.log)
