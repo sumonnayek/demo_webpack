@@ -7,24 +7,16 @@ import {
 const initialState = {};
 
 const notes = (state = initialState, action) => {
-	const {
-		payload: { _id },
-	} = action;
 	switch (action.type) {
-		case FETCH_NOTES_REQUEST:
-			return {
-				...state,
-			};
 		case FETCH_NOTES_SUCCESS:
+			const {
+				payload: { notesList },
+			} = action;
+			console.log(notesList);
 			return {
 				...state,
-				_id: payload,
+				...notesList,
 			};
-		case FETCH_NOTES_FAILURE: {
-			return {
-				...state,
-			};
-		}
 		default:
 			return state;
 	}

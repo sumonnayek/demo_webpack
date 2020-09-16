@@ -7,19 +7,24 @@ import { fetchNotes } from '../../actions';
 export class NotesContainer extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {};
 	}
 
 	componentDidMount() {
-		const { fetchNotes } = this.props;
-		fetchNotes();
+		const { fetchNotes: fetchNotesInProps } = this.props;
+		fetchNotesInProps();
 	}
 
 	render() {
-		console.log(props);
+		console.log(this.props);
+		const { notesMap = {} } = this.props;
+		let notesList = [];
+		notesList = Object.values(notesMap);
+		let list = [];
+		for (let i = 0; i < notesList.length; i++) {}
 		return (
-			<div className='noteContainer'>{/* <GenericList renderComponent={NotesCard} /> */}</div>
+			<div className='noteContainer'>
+				<GenericList renderComponent={NotesCard} />
+			</div>
 		);
 	}
 }
@@ -28,4 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchNotes: () => dispatch(fetchNotes()),
 });
 
-export default connect(null, mapDispatchToProps)(NotesContainer);
+const mapStateToProps = (state) => ({
+	notesMap: state.notesMap,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotesContainer);

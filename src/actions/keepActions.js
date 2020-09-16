@@ -19,10 +19,17 @@ export const fetchNotes = () => {
 		fetch('http://localhost:5000/notes')
 			.then((response) => response.json())
 			.then((data) => {
+				let obj = {};
+				data.map((note) => (obj[note._id] = note));
+				return obj;
+			})
+			// .then(console.log)
+			.then((data) => {
 				dispatch(fetchNotesSuccess(data));
 			})
 			.catch((error) => {
-				dispatch(fetchNotesFailure(error));
+				const errorMsg = error.message;
+				dispatch(fetchNotesFailure(errorMsg));
 			});
 	};
 };
